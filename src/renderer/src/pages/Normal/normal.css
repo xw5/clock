@@ -68,11 +68,11 @@
   transform: rotateX(180deg);
 }
 .clock-item.active .down-front{
-  transition: transform .5s ease-in-out;
+  transition: transform .5s linear;
   transform: rotateX(180deg);
 }
 .clock-item.active .up-back{
-  transition: transform .5s ease-in-out;
+  transition: transform .5s linear;
   transform: rotateX(0deg);
 }
 .separate{

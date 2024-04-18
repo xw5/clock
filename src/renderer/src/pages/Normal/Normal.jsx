@@ -22,16 +22,9 @@ function Normal({}) {
     setAmpm(timeArr[3]);
     setDateStr(timeArr[0] + ' ' + timeArr[2]);
     setNextVal(timeArr[1].replace(/:/g, '').split(''))
-    // ampm.value = timeArr[3];
-    // dateStr.value = timeArr[0] + ' ' + timeArr[2];
-    // nextVal.value = timeArr[1].replace(/:/g, '').split('');
-    // console.log('---- countTime ----:', dateStr.value, nextVal.value);
     setIsPointAni(true);
-    // isPointAni.value = true;
     setTimeout(()=>{
       setNowVal(timeArr[1].replace(/:/g, '').split(''));
-      // nowVal.value = timeArr[1].replace(/:/g, '').split('');
-      // isPointAni.value = false;
       setIsPointAni(false);
     }, 550);
   }
@@ -47,34 +40,38 @@ function Normal({}) {
     setScaleSize(scaleTemp > 1 ? 1 : scaleTemp);
   };
 
+  const tipsHandle = () => {
+    countTag.current += 1;
+    if (countTag.current === 3){
+      countTag.current = 0;
+      const tipsIndexTemp = tipsIndex + (dirction.current === 'up' ? 1 : -1);
+      console.log('---- countTag.current ----:test', tipsIndexTemp, tipsIndex, dirction.current);
+      setTipsIndex(tipsIndexTemp);
+      if (tipsIndexTemp >= 3) {
+        dirction.current = 'down';
+      } else if (tipsIndexTemp <= 0) {
+        dirction.current = 'up';
+      }
+    }
+  }
+
   useEffect(() => {
     resizeFn();
     timer.current = setInterval(()=>{
       countTime();
-      countTag.current += 1;
-      if (countTag.current === 3){
-        countTag.current = 0;
-        const tipsIndexTemp = tipsIndex + (dirction.current === 'up' ? 1 : -1);
-        console.log('---- countTag.current ----:', tipsIndexTemp);
-        setTipsIndex(tipsIndexTemp)
-        if (tipsIndexTemp >= 3) {
-          dirction.current = 'down';
-        } else if (tipsIndexTemp <= 0) {
-          dirction.current = 'up';
-        }
-      }
+      tipsHandle();
     },1000);
     window.addEventListener('resize', resizeFn, false);
     return () => {
       clearInterval(timer.current);
       window.removeEventListener('resize', resizeFn, false);
     };
-  }, []);
+  }, [tipsIndex]);
 
   return (
     <div className="w-full h-screen fixed inset-0 z-50 bg-[rgba(0,0,0,.8)] flex flex-col justify-center items-center clock-wrap">
     <div className="clock-container relative" style={{transform: `scale(${scaleSize})`}}>
-      <div className="text-[rgba(255,255,255,.68)] text-[40px] absolute top-[-80px] left-0 w-full leading-[80px] text-center">{ dateStr }</div>
+      <div className="text-[rgba(255,255,255,.68)] text-[40px] absolute top-[-80px] left-0 w-full leading-[80px] text-center">{ dateStr }{tipsIndex}</div>
       <div className="text-[rgba(255,255,255,.46)] text-[20px] absolute bottom-[-60px] left-0 w-full text-center leading-[30px] h-[30px] tips-wrap">
         <div className="w-full h-full relative tips-container" style={{transform:`rotateX(${tipsIndex * 90}deg)`}}>
           {tipss.map((tips, index) => <p className={"w-full h-full text-center absolute top-0 left-0 "+'tips'+index} key={index}>{ tips }</p>)}
