@@ -2,19 +2,18 @@
 class HeartBeat {
   constructor() {
     this.timer = null;
-    this.runBack = [];
+    this.runBack = {};
     this.isRuning = false;
   }
 
   // 添加心跳运行方法
-  add(fn) {
-    this.runBack.push(fn);
-    return this.runBack.length - 1;
+  add(key, fn) {
+    this.runBack[key] = fn;
   }
 
   // 移除心跳运行方法
-  remove(index) {
-    this.runBack.splice(index, 1);
+  remove(key) {
+    this.runBack[key] = null;
   }
 
   // 启动心跳
@@ -25,8 +24,8 @@ class HeartBeat {
     this.isRuning = true;
     clearInterval(this.timer);
     this.timer = setInterval(() => {
-      this.runBack.forEach((fn) => fn && fn());
-      console.log('---- HeartBeat ----:心跳监听的程序', this.runBack.length);
+      Object.keys(this.runBack).forEach((key) => this.runBack[key] && this.runBack[key]());
+      console.log('---- HeartBeat ----:心跳监听的程序', this.runBack);
     }, 1000);
   }
 

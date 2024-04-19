@@ -9,17 +9,17 @@ import useGlobalStore from '@renderer/store/index.js';
 import './Normal.css';
 
 function Normal({}) {
-  const [ampm, setAmpm] = useState('');
+  // const [ampm, setAmpm] = useState('');
   const [nowVal, setNowVal] = useState([0,0,0,0,0,0]);
   const [nextVal, setNextVal] = useState([0,0,0,0,0,0]);
   const [isPointAni, setIsPointAni] = useState(false);
-  const [scaleSize, setScaleSize] = useState(1);
+  // const [scaleSize, setScaleSize] = useState(1);
   const size = useGlobalStore((state) => state.size);
   const counts = useGlobalStore((state) => state.counts);
   const clockType = useGlobalStore((state) => state.clockType);
   const countsRef = useRef(counts);
+  const countStep = useRef(1);
 
-  let heartIndex = useRef();
   const clockContainer = useRef();
   const resizeTimer = useRef();
   
@@ -29,11 +29,15 @@ function Normal({}) {
     let timerNowStr = '';
     if (clockType === 'timer') {
       countsRef.current = counts;
+      countStep.current = 1;
       timeStr = timestampToTime();
       const timeArr = timeStr.split(' ');
       timerNowStr = timeArr[1];
     } else if(clockType === 'count') {
-      countsRef.current -= 1;
+      countsRef.current -= countStep.current;
+      if (countsRef.current === 0) {
+        countStep.current = -1;
+      }
       timerNowStr = secondsToTime(countsRef.current);
     }
   
@@ -46,27 +50,27 @@ function Normal({}) {
     }, 550);
   }
   
-  const resizeFn = () => {
-    const {innerWidth, innerHeight} = window;
-    let scaleTemp = 1;
-    if (innerWidth < innerHeight) {
-      scaleTemp = innerHeight / 880;
-    } else {
-      scaleTemp = innerWidth / 880;
-    }
-    setScaleSize(scaleTemp > 1 ? 1 : scaleTemp);
-  };
+  // const resizeFn = () => {
+  //   const {innerWidth, innerHeight} = window;
+  //   let scaleTemp = 1;
+  //   if (innerWidth < innerHeight) {
+  //     scaleTemp = innerHeight / 880;
+  //   } else {
+  //     scaleTemp = innerWidth / 880;
+  //   }
+  //   setScaleSize(scaleTemp > 1 ? 1 : scaleTemp);
+  // };
 
   useEffect(() => {
-    resizeFn();
-    heartIndex.current = heartbeat.add(countTime);
+    // resizeFn();
+    heartbeat.add('normal', countTime);
     // window.addEventListener('resize', resizeFn, false);
     // sendSize();
     return () => {
-      heartbeat.remove(heartIndex.current);
+      heartbeat.remove('normal');
       // window.removeEventListener('resize', resizeFn, false);
     };
-  }, [clockType, ]);
+  }, [clockType]);
 
   const sendSize = () => {
     const { offsetWidth, offsetHeight } = clockContainer.current;

@@ -10,8 +10,6 @@ function TextRolling() {
   const [nextTips, setNextTips] = useState('');
   const [isStop, setIsStop] = useState(false);
   const [isFlip, setIsFlip] = useState(false);
-  const dirction = useRef('up');
-  const heartIndex = useRef();
   const countTag= useRef(0);
   const tipsIndexTemp = useRef(0);
 
@@ -42,10 +40,9 @@ function TextRolling() {
   }, [tipsIndex]);
 
   useEffect(() => {
-    heartIndex.current = heartbeat.add(tipsHandle);
-    console.log('---- useEffect heartIndex.current ----:', heartIndex.current);
+    heartbeat.add('textrolling', tipsHandle);
     return () => {
-      heartbeat.remove(heartIndex.current);
+      heartbeat.remove(textrolling);
     };
   }, []);
 
