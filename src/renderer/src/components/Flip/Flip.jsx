@@ -6,7 +6,7 @@ import DateStr from '@renderer/components/DateStr/DateStr.jsx';
 import heartbeat from '@renderer/utils/heartbeat';
 import useGlobalStore from '@renderer/store/index.js';
 
-import './Normal.css';
+import './Flip.css';
 
 function Normal({}) {
   // const [ampm, setAmpm] = useState('');
@@ -24,9 +24,10 @@ function Normal({}) {
   const resizeTimer = useRef();
   
   const countTime = () => {
-    console.log('---- clockType ----:', clockType);
+    // console.log('---- clockType ----:', clockType);
     let timeStr = '';
     let timerNowStr = '';
+    // 时间
     if (clockType === 'timer') {
       countsRef.current = counts;
       countStep.current = 1;
@@ -34,6 +35,7 @@ function Normal({}) {
       const timeArr = timeStr.split(' ');
       timerNowStr = timeArr[1];
     } else if(clockType === 'count') {
+      // 倒计时
       countsRef.current -= countStep.current;
       if (countsRef.current === 0) {
         countStep.current = -1;

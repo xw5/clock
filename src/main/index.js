@@ -44,7 +44,7 @@ app.whenReady().then(() => {
     height: 560,
     transparent: true,
     frame: false,
-  }, 'normal', true);
+  }, 'clock', true);
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the

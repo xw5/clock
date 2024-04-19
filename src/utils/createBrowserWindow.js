@@ -2,7 +2,7 @@ import { BrowserWindow } from 'electron';
 import { is } from '@electron-toolkit/utils';
 import { join } from 'path';
 
-export function createWindow(options, hash = 'normal', isDevTool = false) {
+export function createWindow(options, hash = 'clock', isDevTool = false) {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     show: false,
@@ -19,7 +19,7 @@ export function createWindow(options, hash = 'normal', isDevTool = false) {
   // mainWindow.setIgnoreMouseEvents(true);
   mainWindow.on('ready-to-show', () => {
     mainWindow.show();
-    if (isDevTool) {
+    if (isDevTool && is.dev) {
       mainWindow.webContents.openDevTools();
     }
   });

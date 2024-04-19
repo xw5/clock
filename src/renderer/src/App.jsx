@@ -1,7 +1,7 @@
 // import Versions from './components/Versions'
 import { useEffect, useRef } from 'react';
 import { HashRouter, Routes, Route } from "react-router-dom";
-import Normal from './pages/Normal/Normal.jsx';
+import Clock from './pages/Clock/Clock.jsx';
 import Options from './pages/Options/Options.jsx';
 import heartbeat from '@renderer/utils/heartbeat';
 import useGlobalStore from '@renderer/store/index.js';
@@ -34,11 +34,11 @@ function App() {
   []);
   return <HashRouter >
     <Routes>
-      <Route path="/normal" element={<Normal />} />
+      <Route path="/clock" element={<Clock />} />
       <Route path="/options" element={<Options />} />
     </Routes>
   </HashRouter>
 }
 
-export default App
+export default App;
 

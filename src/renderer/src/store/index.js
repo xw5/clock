@@ -1,6 +1,11 @@
 import { create } from "zustand";
 
 const useGlobalStore = create((set) => ({
+
+  // 时钟款式
+  clockStyle: 'normal',
+  changeClockType: (val) => set((state) => ({ clockStyle: val })),
+
   // 是否显示控制按钮
   isShowBtn: false,
   changeIsShowBtn: (val) => set((state) => ({ isShowBtn: val })),
