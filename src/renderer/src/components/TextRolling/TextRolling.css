@@ -4,7 +4,7 @@
 }
 .tips-container{
   transform-style: preserve-3d;
-  transform-origin: 50% 50% -15px;
+  transform-origin: 50% 50% -1.25em;
   transition: transform .4s;
 }
 .tips0,.tips1,.tips2,.tips3{
@@ -16,7 +16,7 @@
   transform: rotateX(-90deg);
 }
 .tips2{
-  transform: translateZ(-30px) rotateX(180deg);
+  transform: translateZ(-2.5em) rotateX(180deg);
 }
 .tips3{
   top: -100%;

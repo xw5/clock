@@ -1,9 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
+import useGlobalStore from '@renderer/store/index.js';
 import { timestampToTime } from '@renderer/utils/common.js';
+import heartbeat from '@renderer/utils/heartbeat';
 
-function DateStr({initialValue}) {
+function DateStr({}) {
   const [dateStr, setDateStr] = useState('');
   const timer = useRef();
+  const heartIndex = useRef();
+
+  const size = useGlobalStore((state) => state.size);
 
   const countTime = () => {
     const timeStr = timestampToTime();
@@ -12,16 +17,15 @@ function DateStr({initialValue}) {
   }
 
   useEffect(() => {
-    timer.current = setInterval(()=>{
-      countTime();
-    },1000);
+    countTime();
+    heartIndex.current = heartbeat.add(countTime);
     return () => {
-      clearInterval(timer.current);
+      heartbeat.remove(heartIndex.current);
     };
   }, []);
 
 
-  return <div className="text-[rgba(255,255,255,.68)] text-[40px] w-full leading-[1.5em] text-center">{ dateStr }</div>
+  return <div className="text-[rgba(255,255,255,.68)] w-full leading-[1.5em] text-center" style={{fontSize: size / 2.5+'px'}}>{ dateStr }</div>
 }
 
 export default DateStr

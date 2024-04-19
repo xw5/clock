@@ -1,1 +1,9 @@
 @import './base.css';
+.drag{
+  user-select: none;
+  -webkit-app-region: drag;
+}
+.no-drag{
+  user-select: text;
+  -webkit-app-region: no-drag;
+}

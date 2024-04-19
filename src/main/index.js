@@ -6,8 +6,8 @@ import icon from '../../resources/icon.png?asset'
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 710,
-    height: 260,
+    width: 1000,
+    height: 560,
     show: false,
     autoHideMenuBar: true,
     // alwaysOnTop: true,
@@ -21,7 +21,8 @@ function createWindow() {
   });
   // mainWindow.setIgnoreMouseEvents(true);
   mainWindow.on('ready-to-show', () => {
-    mainWindow.show()
+    mainWindow.show();
+    mainWindow.webContents.openDevTools();
   })
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
@@ -57,6 +58,15 @@ app.whenReady().then(() => {
 
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
+  // 实时调整窗口尺寸
+  ipcMain.on('resize', (e,w,h) => {
+    console.log('---- resize ----:', w, h);
+    const nowWin = BrowserWindow.fromWebContents(e.sender);
+    nowWin.setBounds({
+      width: w,
+      height: h
+    }, true);
+  });
 
   createWindow()
 

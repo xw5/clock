@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import heartbeat from '@renderer/utils/heartbeat';
+import useGlobalStore from '@renderer/store/index.js';
 import './TextRolling.css';
 
 function TextRolling() {
@@ -9,6 +10,8 @@ function TextRolling() {
   const dirction = useRef('up');
   const heartIndex = useRef();
   const countTag= useRef(0);
+
+  const size = useGlobalStore((state) => state.size);
 
   const tipsHandle = () => {
     countTag.current += 1;
@@ -34,7 +37,7 @@ function TextRolling() {
   }, [tipsIndex]);
 
   return (
-    <div className="text-[rgba(255,255,255,.46)] text-[20px] absolute bottom-[-2em] left-0 w-full text-center leading-[1.5em] h-[1.5em] tips-wrap">
+    <div className="text-[rgba(255,255,255,.46)] w-full text-center leading-[2.5em] h-[2.5em] tips-wrap" style={{fontSize: size / 5 + 'px'}}>
       <div className="w-full h-full relative tips-container" style={{transform:`rotateX(${tipsIndex * 90}deg)`}}>
         {tipss.map((tips, index) => <p className={"w-full h-full text-center absolute top-0 left-0 "+'tips'+index} key={index}>{ tips }</p>)}
       </div>
