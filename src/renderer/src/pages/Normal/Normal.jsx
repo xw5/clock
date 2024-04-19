@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate, Link } from 'react-router-dom';
-import { timestampToTime } from '@renderer/utils/common.js';
+import { timestampToTime, secondsToTime } from '@renderer/utils/common.js';
 import TextRolling from '@renderer/components/TextRolling/TextRolling.jsx';
 import DateStr from '@renderer/components/DateStr/DateStr.jsx';
 import heartbeat from '@renderer/utils/heartbeat';
 import useGlobalStore from '@renderer/store/index.js';
+
 import './Normal.css';
 
 function Normal({}) {
@@ -14,19 +15,33 @@ function Normal({}) {
   const [isPointAni, setIsPointAni] = useState(false);
   const [scaleSize, setScaleSize] = useState(1);
   const size = useGlobalStore((state) => state.size);
+  const counts = useGlobalStore((state) => state.counts);
+  const clockType = useGlobalStore((state) => state.clockType);
+  const countsRef = useRef(counts);
 
   let heartIndex = useRef();
   const clockContainer = useRef();
   const resizeTimer = useRef();
   
   const countTime = () => {
-    const timeStr = timestampToTime();
-    const timeArr = timeStr.split(' ');
-    setAmpm(timeArr[3]);
-    setNextVal(timeArr[1].replace(/:/g, '').split(''))
+    console.log('---- clockType ----:', clockType);
+    let timeStr = '';
+    let timerNowStr = '';
+    if (clockType === 'timer') {
+      countsRef.current = counts;
+      timeStr = timestampToTime();
+      const timeArr = timeStr.split(' ');
+      timerNowStr = timeArr[1];
+    } else if(clockType === 'count') {
+      countsRef.current -= 1;
+      timerNowStr = secondsToTime(countsRef.current);
+    }
+  
+    // setAmpm(timeArr[3]);
+    setNextVal(timerNowStr.replace(/:/g, '').split(''))
     setIsPointAni(true);
     setTimeout(()=>{
-      setNowVal(timeArr[1].replace(/:/g, '').split(''));
+      setNowVal(timerNowStr.replace(/:/g, '').split(''));
       setIsPointAni(false);
     }, 550);
   }
@@ -51,7 +66,7 @@ function Normal({}) {
       heartbeat.remove(heartIndex.current);
       // window.removeEventListener('resize', resizeFn, false);
     };
-  }, []);
+  }, [clockType, ]);
 
   const sendSize = () => {
     const { offsetWidth, offsetHeight } = clockContainer.current;
@@ -65,9 +80,9 @@ function Normal({}) {
   }, [size]);
 
   return (
-    <div className="w-full h-screen fixed inset-0 z-50 flex flex-col justify-center items-center pointer-events-none clock-wrap">
+    <div className="w-full h-screen fixed inset-0 z-50 flex flex-col justify-center items-center cursor-pointer select-none clock-wrap">
       {/* style={{transform: `scale(${scaleSize})`}} */}
-    <div className="clock-container relative flex flex-col drag pointer-events-auto" ref={clockContainer}>
+    <div className="clock-container relative flex flex-col pointer-events-auto group/action" ref={clockContainer}>
       {/* 日期 星期 */}
       <DateStr />
       {/* <div className="text-[rgba(255,255,255,.26)] text-[40px] absolute bottom-0 right-[-78px]">{ ampm }</div> */}

@@ -66,6 +66,18 @@ export function timestampToTime(fmt='YYYY年MM月DD日 hh:mm:ss WW ap', timestam
 };
 
 /**
+ * 秒转倒计时时间
+ * @param {number} senconds 
+ * @returns 
+ */
+export function secondsToTime(senconds) {
+  const h = parseInt(senconds / 3600);
+  const m = parseInt(senconds % 3600 / 60);
+  const s = parseInt(senconds % 3600 % 60);
+  return `${("00" + h).substr(("" + h).length)}:${("00" + m).substr(("" + m).length)}:${("00" + s).substr(("" + s).length)}`;
+}
+
+/**
 * @desc 函数防抖
 * @param func 目标函数
 * @param wait 延迟执行毫秒数

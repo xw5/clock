@@ -1,4 +1,5 @@
 @import './base.css';
+@import './iconfont/iconfont.css';
 .drag{
   user-select: none;
   -webkit-app-region: drag;
