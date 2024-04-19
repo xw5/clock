@@ -6,7 +6,7 @@ import DateStr from '@renderer/components/DateStr/DateStr.jsx';
 import heartbeat from '@renderer/utils/heartbeat';
 import useGlobalStore from '@renderer/store/index.js';
 
-import './Normal.css';
+import './Normal.scss';
 
 function Normal({}) {
   // const [ampm, setAmpm] = useState('');
@@ -44,12 +44,7 @@ function Normal({}) {
     }
   
     // setAmpm(timeArr[3]);
-    setNextVal(timerNowStr.replace(/:/g, '').split(''))
-    setIsPointAni(true);
-    setTimeout(()=>{
-      setNowVal(timerNowStr.replace(/:/g, '').split(''));
-      setIsPointAni(false);
-    }, 550);
+    setNowVal(timerNowStr.replace(/:/g, '').split(''));
   }
   
   // const resizeFn = () => {
@@ -88,72 +83,54 @@ function Normal({}) {
   return (
     <div className="w-full h-screen fixed inset-0 z-50 flex flex-col justify-center items-center cursor-pointer select-none clock-wrap">
       {/* style={{transform: `scale(${scaleSize})`}} */}
-    <div className="clock-container relative flex flex-col pointer-events-auto group/action" ref={clockContainer}>
+      <div className="clock-container relative flex flex-col pointer-events-auto group/action" ref={clockContainer}>
       {/* 日期 星期 */}
       <DateStr />
       {/* <div className="text-[rgba(255,255,255,.26)] text-[40px] absolute bottom-0 right-[-78px]">{ ampm }</div> */}
       <div className="w-full flex flex-row items-center" style={{fontSize: size * 1.1 + 'px'}}>
         <div 
-          className={"clock-item mr-[10px]" + (nowVal[0] !== nextVal[0] ? ' active' : '')} 
+          className="clock-item mr-[10px]" 
           style={{width: size + 'px', height: size * 1.6 + 'px', fontSize: size * 1.1 + 'px', lineHeight: size * 1.6 + 'px'}}
         >
-          <div className="clock-num up up-front">{ nowVal[0] }</div>
-          <div className="clock-num down down-front">{ nowVal[0] }</div>
-          <div className="clock-num up up-back">{ nextVal[0] }</div>
-          <div className="clock-num down down-back">{ nextVal[0] }</div>
+          <div className="clock-num">{ nowVal[0] }</div>
         </div>
         <div 
-          className={"clock-item" + (nowVal[1] !== nextVal[1] ? ' active' : '')}
+          className="clock-item"
           style={{width: size + 'px', height: size * 1.6 + 'px', fontSize: size * 1.1 + 'px', lineHeight: size * 1.6 + 'px'}}
         >
-          <div className="clock-num up up-front">{ nowVal[1] }</div>
-          <div className="clock-num down down-front">{ nowVal[1] }</div>
-          <div className="clock-num up up-back">{ nextVal[1] }</div>
-          <div className="clock-num down down-back">{ nextVal[1] }</div>
+          <div className="clock-num">{ nowVal[1] }</div>
         </div>
         <div className={"separate" + (isPointAni ? ' active': '')} style={{fontSize: size / 2.5 + 'px'}}>
           <span className="separate-item"></span>
           <span className="separate-item"></span>
         </div>
         <div 
-          className={"clock-item mr-[10px]" + (nowVal[2] !== nextVal[2] ? ' active' : '')}
+          className="clock-item mr-[10px]"
           style={{width: size + 'px', height: size * 1.6 + 'px', fontSize: size * 1.1 + 'px', lineHeight: size * 1.6 + 'px'}}
         >
-          <div className="clock-num up up-front">{ nowVal[2] }</div>
-          <div className="clock-num down down-front">{ nowVal[2] }</div>
-          <div className="clock-num up up-back">{ nextVal[2] }</div>
-          <div className="clock-num down down-back">{ nextVal[2] }</div>
+          <div className="clock-num">{ nowVal[2] }</div>
         </div>
         <div 
-          className={"clock-item" + (nowVal[3] !== nextVal[3] ? ' active' : '')}
+          className="clock-item"
           style={{width: size + 'px', height: size * 1.6 + 'px', fontSize: size * 1.1 + 'px', lineHeight: size * 1.6 + 'px'}}
         >
-          <div className="clock-num up up-front">{ nowVal[3] }</div>
-          <div className="clock-num down down-front">{ nowVal[3] }</div>
-          <div className="clock-num up up-back">{ nextVal[3] }</div>
-          <div className="clock-num down down-back">{ nextVal[3] }</div>
+          <div className="clock-num">{ nowVal[3] }</div>
         </div>
         <div className={"separate" + (isPointAni ? ' active': '')} style={{fontSize: size / 2.5 + 'px'}}>
           <span className="separate-item"></span>
           <span className="separate-item"></span>
         </div>
         <div 
-          className={"clock-item mr-[10px]" + (nowVal[4] !== nextVal[4] ? ' active' : '')}
+          className="clock-item mr-[10px]"
           style={{width: size + 'px', height: size * 1.6 + 'px', fontSize: size * 1.1 + 'px', lineHeight: size * 1.6 + 'px'}}
         >
-          <div className="clock-num up up-front">{ nowVal[4] }</div>
-          <div className="clock-num down down-front">{ nowVal[4] }</div>
-          <div className="clock-num up up-back">{ nextVal[4] }</div>
-          <div className="clock-num down down-back">{ nextVal[4] }</div>
+          <div className="clock-num">{ nowVal[4] }</div>
         </div>
         <div 
-          className={"clock-item" + (nowVal[5] !== nextVal[5] ? ' active' : '')}
+          className="clock-item"
           style={{width: size + 'px', height: size * 1.6 + 'px', fontSize: size * 1.1 + 'px', lineHeight: size * 1.6 + 'px'}}
         >
-          <div className="clock-num up up-front">{ nowVal[5] }</div>
-          <div className="clock-num down down-front">{ nowVal[5] }</div>
-          <div className="clock-num up up-back">{ nextVal[5] }</div>
-          <div className="clock-num down down-back">{ nextVal[5] }</div>
+          <div className="clock-num">{ nowVal[5] }</div>
         </div>
       </div>
       {/* 提示 */}
