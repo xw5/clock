@@ -1,11 +1,11 @@
 .clock-wrap{
-  -webkit-backdrop-filter: blur(8px);
+  /* -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
-  transition: opacity 0.3s;
+  transition: opacity 0.3s; */
 }
 .clock-container{
-  display: flex;
-  flex-direction: row;
+  user-select: none;
+  -webkit-app-region: drag;
 }
 .clock-item{
   position: relative;
@@ -36,7 +36,7 @@
   text-align: center;
   /* display: flex;
   justify-content: center; */
-  font-size: 120px;
+  font-size: 110px;
   font-weight: bold;
   color: #fff;
   backface-visibility: hidden;
@@ -65,15 +65,15 @@
 .up-back{
   z-index: 3;
   transform-origin: center bottom;
-  transform: rotateX(180deg);
+  transform: translate3d(0, 0, 0) rotateX(180deg);
 }
 .clock-item.active .down-front{
   transition: transform .5s linear;
-  transform: rotateX(180deg);
+  transform: translate3d(0, 0, 0) rotateX(180deg);
 }
 .clock-item.active .up-back{
   transition: transform .5s linear;
-  transform: rotateX(0deg);
+  transform: translate3d(0, 0, 0) rotateX(0deg);
 }
 .separate{
   display: flex;

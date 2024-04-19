@@ -6,19 +6,20 @@ import icon from '../../resources/icon.png?asset'
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 750,
-    height: 640,
+    width: 710,
+    height: 260,
     show: false,
     autoHideMenuBar: true,
     // alwaysOnTop: true,
-    frame: true,
+    transparent: true,
+    frame: false,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false
     }
-  })
-
+  });
+  // mainWindow.setIgnoreMouseEvents(true);
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
   })

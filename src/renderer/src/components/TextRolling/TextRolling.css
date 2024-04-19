@@ -1,0 +1,25 @@
+.tips-wrap{
+  perspective: 400px;
+  /* animation: tipsani 4s steps(4) 0s infinite; */
+}
+.tips-container{
+  transform-style: preserve-3d;
+  transform-origin: 50% 50% -15px;
+  transition: transform .4s;
+}
+.tips0,.tips1,.tips2,.tips3{
+  backface-visibility: hidden;
+}
+.tips1{
+  top: 100%;
+  transform-origin: center top;
+  transform: rotateX(-90deg);
+}
+.tips2{
+  transform: translateZ(-30px) rotateX(180deg);
+}
+.tips3{
+  top: -100%;
+  transform-origin: center bottom;
+  transform: rotateX(90deg);
+}
