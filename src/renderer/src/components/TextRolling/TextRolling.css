@@ -7,6 +7,12 @@
   transform-origin: 50% 50% -1.25em;
   transition: transform .4s;
 }
+.stop{
+  transition: none;
+}
+.flip{
+  transform: rotateX(90deg);
+}
 .tips0,.tips1,.tips2,.tips3{
   backface-visibility: hidden;
 }

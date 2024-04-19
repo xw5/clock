@@ -90,7 +90,7 @@ function Normal({}) {
           <div className="clock-num up up-back">{ nextVal[1] }</div>
           <div className="clock-num down down-back">{ nextVal[1] }</div>
         </div>
-        <div className={"separate" + (isPointAni ? ' active': '')}>
+        <div className={"separate" + (isPointAni ? ' active': '')} style={{fontSize: size / 2.5 + 'px'}}>
           <span className="separate-item"></span>
           <span className="separate-item"></span>
         </div>
@@ -112,7 +112,7 @@ function Normal({}) {
           <div className="clock-num up up-back">{ nextVal[3] }</div>
           <div className="clock-num down down-back">{ nextVal[3] }</div>
         </div>
-        <div className={"separate" + (isPointAni ? ' active': '')}>
+        <div className={"separate" + (isPointAni ? ' active': '')} style={{fontSize: size / 2.5 + 'px'}}>
           <span className="separate-item"></span>
           <span className="separate-item"></span>
         </div>

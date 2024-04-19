@@ -76,7 +76,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: .25em;
+  width: 1em;
   /* width: calc(var(--size) * .4); */
 }
 @keyframes clockPoint {
@@ -88,9 +88,9 @@
   }
 }
 .separate-item{
-  width: .1em;
-  height: .1em;
-  border-radius: 1px;
+  width: .25em;
+  height: .25em;
+  border-radius: 3px;
   background-color: rgb(22, 69, 62);
 }
 .separate-item:nth-of-type(1) {
