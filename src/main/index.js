@@ -46,7 +46,7 @@ app.whenReady().then(() => {
       width: 750,
       height: 560,
       title,
-      icon: path.join(__dirname, '../../resources/logo.ico')
+      icon: path.join(__dirname, '../../resources/logo32.ico')
     }, hash, true);
   });
 
