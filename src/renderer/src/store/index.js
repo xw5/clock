@@ -40,6 +40,11 @@ const useGlobalStore = create(persist({
   counts,
   chagneCounts: (val) => set((state) => ({ counts: val })),
 
+  // 重新倒计时
+  isRestCounts: false,
+  chagneIsRestCounts: (val) => set((state) => ({ isRestCounts: val })),
+  
+
   // 时钟大小px
   size,
   changeSize: (val) => set((state) => ({ size: val })),

@@ -18,6 +18,7 @@ function Normal({}) {
   const timeColor = useGlobalStore((state) => state.timeColor);
   const counts = useGlobalStore((state) => state.counts);
   const clockType = useGlobalStore((state) => state.clockType);
+  const isRestCounts = useGlobalStore((state) => state.isRestCounts);
   const countsRef = useRef(counts);
   const countStep = useRef(1);
 
@@ -84,6 +85,12 @@ function Normal({}) {
     clearTimeout(resizeTimer.current);
     resizeTimer.current = setTimeout(sendSize, 300);
   }, [size]);
+
+  useEffect(() => {
+    console.log('---- isRestCounts, counts, useEffect ----:', isRestCounts, counts);
+    countsRef.current = counts;
+    countStep.current = 1;
+  }, [isRestCounts, counts]);
 
   return (
     <div className="w-full h-screen fixed inset-0 z-50 flex flex-col justify-center items-center cursor-pointer select-none clock-normal">

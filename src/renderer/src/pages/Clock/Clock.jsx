@@ -7,9 +7,13 @@ import Drag from '@renderer/utils/Drag.js';
 
 function Clock() {
   const clockstyle = useGlobalStore((state) => state.clockStyle);
+  const clockType = useGlobalStore((state) => state.clockType);
+  const clockTypeRef = useRef(clockType);
+  const changeClockType = useGlobalStore((state) => state.changeClockType);
   const storageUpdate = useRef(null);
   const mouseEnter = useRef();
   const mouseLeave = useRef();
+  const contextMenu = useRef();
   const changeIsShowBtn = useGlobalStore((state) => state.changeIsShowBtn);
   const changeClockStyle = useGlobalStore((state) => state.changeClockStyle);
   const changeIsTop = useGlobalStore((state) => state.changeIsTop);
@@ -21,6 +25,8 @@ function Clock() {
   const changeDataColor = useGlobalStore((state) => state.changeDataColor);
   const changeTipsColor = useGlobalStore((state) => state.changeTipsColor);
   const changeTipss = useGlobalStore((state) => state.changeTipss);
+  const isRestCounts = useGlobalStore((state) => state.isRestCounts);
+  const chagneIsRestCounts = useGlobalStore((state) => state.chagneIsRestCounts);
 
   mouseEnter.current = () => {
     changeIsShowBtn(true);
@@ -29,6 +35,14 @@ function Clock() {
   mouseLeave.current = () => {
     changeIsShowBtn(false);
   }
+
+  contextMenu.current = () => {
+    window.electron.ipcRenderer.send('show-context-menu', clockTypeRef.current);
+  }
+
+  useEffect(() => {
+    clockTypeRef.current = clockType
+  }, [clockType]);
 
   useEffect(() => {
     heartbeat.start();
@@ -41,8 +55,35 @@ function Clock() {
       clockWrap.removeEventListener('mouseenter', mouseEnter.current, false);
       clockWrap.removeEventListener('mouseleave', mouseLeave.current, false);
     };
+  }, []);
+
+  useEffect(() => {
+    window.electron.ipcRenderer.on('contextAction', (e, type) => {
+      // console.log('---- contextAction ----:', e, type);
+      switch(type) {
+        case 'count':
+          changeClockType('count');
+          break;
+        case 'timer':
+          changeClockType('timer');
+          break;
+        case 'resetCount':
+          chagneIsRestCounts(isRestCounts ? false : true);
+          break;
+        default:
+          break;
+      }
+    })
   },
-  []);
+  [isRestCounts]);
+
+  useEffect(() => {
+    const clockWrap = document.querySelector('#clockWrap');
+    clockWrap.addEventListener('contextmenu', contextMenu.current, false);
+    return () => {
+      clockWrap.removeEventListener('contextmenu', contextMenu.current, false);
+    };
+  }, []);
 
   storageUpdate.current = (e) => {
     console.log('---- storageUpdate.current ----:', e);
@@ -52,12 +93,12 @@ function Clock() {
     }
     const newValueO = JSON.parse(JSON.parse(newValue).globalStorage);
     const oldValueO = JSON.parse(JSON.parse(oldValue).globalStorage);
-    console.log('---- newValueO ----:', typeof newValueO,  Object.keys(newValueO));
-    console.log('---- oldValueO ----:', oldValueO);
+    // console.log('---- newValueO ----:', typeof newValueO,  Object.keys(newValueO));
+    // console.log('---- oldValueO ----:', oldValueO);
     Object.keys(newValueO).forEach((key) => {
       if (newValueO[key] !== oldValueO[key]) {
         const nowVal = newValueO[key];
-        console.log('---- storageUpdate.current ----:', key, nowVal);
+        // console.log('---- storageUpdate.current ----:', key, nowVal);
         switch(key) {
           case 'isTop':
             changeIsTop(nowVal);
@@ -100,7 +141,6 @@ function Clock() {
   }
 
   useEffect(() => {
-    console.log('---- clock clockstyle ----:', clockstyle);
     window.addEventListener("storage", storageUpdate.current, false);
     return () => {
       window.removeEventListener("storage", storageUpdate.current, false);

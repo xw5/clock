@@ -3,6 +3,7 @@ import { electronApp, optimizer } from '@electron-toolkit/utils';
 import path from 'path';
 import { createWindow } from '../utils/createBrowserWindow.js';
 import createTray from '../utils/tray.js';
+import { createPopMenu } from '../utils/contextmenu.js';
 
 let mainWindow = null;
 
@@ -24,7 +25,7 @@ app.whenReady().then(() => {
   ipcMain.on('ping', () => console.log('pong'))
   // 实时调整窗口尺寸
   ipcMain.on('resize', (e,w,h) => {
-    console.log('---- resize ----:', w, h);
+    // console.log('---- resize ----:', w, h);
     const nowWin = BrowserWindow.fromWebContents(e.sender);
     nowWin.setBounds({
       width: w,
@@ -54,6 +55,11 @@ app.whenReady().then(() => {
   ipcMain.on('close', (e) => {
     const nowWin = BrowserWindow.fromWebContents(e.sender);
     nowWin.close();
+  });
+
+  // 右键菜单
+  ipcMain.on('show-context-menu', (e, type) => {
+    createPopMenu(e, type);
   });
 
   mainWindow = createWindow({
