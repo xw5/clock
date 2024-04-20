@@ -15,7 +15,7 @@ export const createPopMenu = (e, type) => {
       BrowserWindow.fromWebContents(e.sender).send('contextAction', 'timer');
     }
   }] : [{
-    label: '倒计时',
+    label: '显示倒计时',
     click: () => { 
       BrowserWindow.fromWebContents(e.sender).send('contextAction', 'count');
     }
