@@ -15,7 +15,7 @@ const useGlobalStore = create((set) => ({
   changeClockType: (val) => set((state) => ({ clockType: val })),
 
   // 倒计时时间s
-  counts: 10,
+  counts: 600,
   chagneCounts: (val) => set((state) => ({ counts: val })),
 
   // 时钟大小px

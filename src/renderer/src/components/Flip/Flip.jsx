@@ -8,7 +8,7 @@ import useGlobalStore from '@renderer/store/index.js';
 
 import './Flip.scss';
 
-function Normal({}) {
+function Flip({}) {
   // const [ampm, setAmpm] = useState('');
   const [nowVal, setNowVal] = useState([0,0,0,0,0,0]);
   const [nextVal, setNextVal] = useState([0,0,0,0,0,0]);
@@ -87,7 +87,7 @@ function Normal({}) {
 
   return (
     <div className="w-full h-screen fixed inset-0 z-50 flex flex-col justify-center items-center cursor-pointer select-none clock-flip">
-      {/* style={{transform: `scale(${scaleSize})`}} */
+      {/* style={{transform: `scale(${scaleSize})`}} */}
       <div className="clock-container relative flex flex-col pointer-events-auto group/action" ref={clockContainer}>
         {/* 日期 星期 */}
         <DateStr />

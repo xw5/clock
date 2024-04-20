@@ -13,7 +13,9 @@ class HeartBeat {
 
   // 移除心跳运行方法
   remove(key) {
-    this.runBack[key] = null;
+    if (this.runBack[key]) {
+      this.runBack[key] = null;
+    }
   }
 
   // 启动心跳

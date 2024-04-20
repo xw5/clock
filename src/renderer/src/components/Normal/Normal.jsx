@@ -42,9 +42,12 @@ function Normal({}) {
       }
       timerNowStr = secondsToTime(countsRef.current);
     }
-  
     // setAmpm(timeArr[3]);
     setNowVal(timerNowStr.replace(/:/g, '').split(''));
+    setIsPointAni(true);
+    const timer = setTimeout(() => {
+      setIsPointAni(false);
+    }, 300);
   }
   
   // const resizeFn = () => {
@@ -81,7 +84,7 @@ function Normal({}) {
   }, [size]);
 
   return (
-    <div className="w-full h-screen fixed inset-0 z-50 flex flex-col justify-center items-center cursor-pointer select-none clock-wrap">
+    <div className="w-full h-screen fixed inset-0 z-50 flex flex-col justify-center items-center cursor-pointer select-none clock-normal">
       {/* style={{transform: `scale(${scaleSize})`}} */}
       <div className="clock-container relative flex flex-col pointer-events-auto group/action" ref={clockContainer}>
       {/* 日期 星期 */}

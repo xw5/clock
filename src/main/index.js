@@ -39,6 +39,14 @@ app.whenReady().then(() => {
     nowWin.setPosition(posx　+ x, posy + y);
   });
 
+  // 打开新窗口 - 指定路由
+  ipcMain.on('open', (e, hash) => {
+    createWindow({
+      width: 750,
+      height: 560,
+    }, hash, true);
+  });
+
   mainWindow = createWindow({
     width: 1000,
     height: 560,

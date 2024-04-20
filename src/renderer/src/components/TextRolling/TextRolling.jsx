@@ -42,7 +42,7 @@ function TextRolling() {
   useEffect(() => {
     heartbeat.add('textrolling', tipsHandle);
     return () => {
-      heartbeat.remove(textrolling);
+      heartbeat.remove('textrolling');
     };
   }, []);
 
@@ -50,8 +50,8 @@ function TextRolling() {
     <div className="text-[rgba(255,255,255,.46)] w-full text-center leading-[2.5em] h-[2.5em] tips-wrap" style={{fontSize: size / 5 + 'px'}}>
       <div className={"w-full h-full relative tips-container" + (isFlip ? ' flip' : '') + (isStop ? ' stop' : '')}>
         {/* {tipss.map((tips, index) => <p className={"w-full h-full text-center absolute top-0 left-0 "+'tips'+index} key={index}>{ tips }</p>)} */}
-        <p className="w-full h-full text-center absolute top-0 left-0 tips0" >{ nowTips }</p>
-        <p className="w-full h-full text-center absolute top-0 left-0 tips1" >{ nextTips }</p>
+        <p className="w-full h-full text-center absolute top-0 left-0 tips0 drop-shadow-[0_1px_1px_rgba(0,0,0,0.5)]" >{ nowTips }</p>
+        <p className="w-full h-full text-center absolute top-0 left-0 tips1 drop-shadow-[0_1px_1px_rgba(0,0,0,0.5)]" >{ nextTips }</p>
       </div>
     </div>
   )
