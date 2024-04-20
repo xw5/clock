@@ -108,3 +108,47 @@ export const debounceResize = (chart) => {
   }
   window.addEventListener("resize", debounce(resizeBack), false);
 }
+
+/**
+ * rgba字符串转{r,g,b,a}
+ * @param {String} str 
+ * @returns 
+ */
+export const regbToObj = (str) => {
+  let obj = {};
+  let arr = [];
+  if (str) {
+    if (Object.prototype.toString.call(str) === "[object Array]") { //判断数据类型
+      for (let key in str) {
+        let strArr = [];
+        let strObj = {};
+        strArr = str[key]
+          .split("(")[1]
+          .split(")")[0]
+          .split(","); // 将rgba分割成数组
+        strObj.r = Number(strArr[0].trim());
+        strObj.g = Number(strArr[1].trim());
+        strObj.b = Number(strArr[2].trim());
+        strObj.a = Number(strArr[3].trim());
+        arr.push(strObj);
+      }
+      return arr;
+    } else {
+      arr = str
+        .split("(")[1]
+        .split(")")[0]
+        .split(",");
+      if (arr.length == 4) {
+        obj.r = Number(arr[0].trim());
+        obj.g = Number(arr[1].trim());
+        obj.b = Number(arr[2].trim());
+        obj.a = Number(arr[3].trim());
+      } else {
+        return str; // 传参有误处理
+      }
+    }
+    return obj;
+  } else {
+    return str; // 传null处理
+  }
+};

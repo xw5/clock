@@ -6,6 +6,10 @@ const useGlobalStore = create((set) => ({
   clockStyle: 'normal',
   changeClockType: (val) => set((state) => ({ clockStyle: val })),
 
+  // 窗口置顶
+  isTop: false,
+  changeIsTop: (val) => set((state) => ({ isTop: val })),
+
   // 是否显示控制按钮
   isShowBtn: false,
   changeIsShowBtn: (val) => set((state) => ({ isShowBtn: val })),
@@ -41,6 +45,10 @@ const useGlobalStore = create((set) => ({
   // 提示文字颜色
   tipsColor: 'rgba(255,255,255,.46)',
   changeTipsColor: (val) => set((state) => ({ tipsColor: val })),
+
+  // 底部提示文字
+  tipss: ['一寸光阴一寸金，寸金难买寸光阴','时光荏苒，岁月如梭，珍惜当下，莫待明日','时间是生命的馈赠，珍惜它，就是对生命最好的尊重','时间就像流水，一旦逝去，便不复返'],
+  changeTipss: (val) => set((state) => ({ tipss: val })),
 }));
 
 export default useGlobalStore;

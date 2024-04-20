@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import useGlobalStore from '@renderer/store/index.js';
 import Normal from '@renderer/components/Normal/Normal.jsx';
 import Flip from '@renderer/components/Flip/Flip.jsx';

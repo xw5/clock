@@ -4,16 +4,17 @@ import useGlobalStore from '@renderer/store/index.js';
 import './TextRolling.css';
 
 function TextRolling() {
-  const [tipss, setTipss] = useState(['一寸光阴一寸金，寸金难买寸光阴','时光荏苒，岁月如梭，珍惜当下，莫待明日','时间是生命的馈赠，珍惜它，就是对生命最好的尊重','时间就像流水，一旦逝去，便不复返']);
+  // const [tipss, setTipss] = useState(['一寸光阴一寸金，寸金难买寸光阴','时光荏苒，岁月如梭，珍惜当下，莫待明日','时间是生命的馈赠，珍惜它，就是对生命最好的尊重','时间就像流水，一旦逝去，便不复返']);
   const [tipsIndex, setTipsIndex] = useState(0);
-  const [nowTips, setNowTips] = useState(tipss[0]);
-  const [nextTips, setNextTips] = useState('');
   const [isStop, setIsStop] = useState(false);
   const [isFlip, setIsFlip] = useState(false);
   const countTag= useRef(0);
   const tipsIndexTemp = useRef(0);
 
   const size = useGlobalStore((state) => state.size);
+  const tipss = useGlobalStore((state) => state.tipss);
+  const [nowTips, setNowTips] = useState(tipss[0]);
+  const [nextTips, setNextTips] = useState('');
 
   const tipsHandle = () => {
     countTag.current += 1;
