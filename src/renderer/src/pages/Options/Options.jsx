@@ -272,7 +272,7 @@ function Options({}) {
           <InputNumber min={10} style={{ width: 168 }} onChange={countsChange} />
         </Form.Item>
       </Form>
-      <div class="w-full flex items-center justify-center pb-[20px]">
+      <div className="w-full flex items-center justify-center pb-[20px]">
         <Button onClick={reset} htmlType="reset" className="mr-[10px]">
           重置
         </Button>

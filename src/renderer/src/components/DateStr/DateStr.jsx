@@ -25,7 +25,7 @@ function DateStr() {
   }
 
   const openOptions = () => {
-    window.electron.ipcRenderer.send('open', 'options');
+    window.electron.ipcRenderer.send('open', 'options', '时钟配置');
   }
 
   useEffect(() => {

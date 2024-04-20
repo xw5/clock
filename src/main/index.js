@@ -40,10 +40,11 @@ app.whenReady().then(() => {
   });
 
   // 打开新窗口 - 指定路由
-  ipcMain.on('open', (e, hash) => {
+  ipcMain.on('open', (e, hash, title) => {
     createWindow({
       width: 750,
       height: 560,
+      title,
     }, hash, true);
   });
 
