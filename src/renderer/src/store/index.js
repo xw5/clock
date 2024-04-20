@@ -1,56 +1,71 @@
 import { create } from "zustand";
 import persist from '@renderer/utils/persist.js';
+import { clockConfig } from "@renderer/utils/defaultConfig";
 
+const {
+  clockStyle,
+  isTop,
+  isShowBtn,
+  clockType,
+  counts,
+  size,
+  tipsDelay,
+  cardColor,
+  timeColor,
+  dataColor,
+  tipsColor,
+  tipss
+} = clockConfig;
 const useGlobalStore = create(persist({
   key: 'globalStorage', // 用于区分不同的 Store
 }, (set) => ({
 
   // 时钟款式
-  clockStyle: 'normal',
+  clockStyle,
   changeClockStyle: (val) => set((state) => ({ clockStyle: val })),
 
   // 窗口置顶
-  isTop: false,
+  isTop,
   changeIsTop: (val) => set((state) => ({ isTop: val })),
 
   // 是否显示控制按钮
-  isShowBtn: false,
+  isShowBtn,
   changeIsShowBtn: (val) => set((state) => ({ isShowBtn: val })),
 
   // 当前时钟模式
-  clockType: 'timer', // timer: 时钟 count: 倒计时
+  clockType, // timer: 时钟 count: 倒计时
   changeClockType: (val) => set((state) => ({ clockType: val })),
 
   // 倒计时时间s
-  counts: 600,
+  counts,
   chagneCounts: (val) => set((state) => ({ counts: val })),
 
   // 时钟大小px
-  size: 100,
+  size,
   changeSize: (val) => set((state) => ({ size: val })),
 
   // 下面文字滚播间隔s
-  tipsDelay: 3,
+  tipsDelay,
   changeTipsDelay: (val) => set((state) => ({ tipsDelay: val })),
 
   // 卡片背景颜色
-  cardColor: 'rgba(22, 69, 62, 1)',
+  cardColor,
   changeCardColor: (val) => set((state) => ({ cardColor: val })),
 
   // 数字时钟文字颜色
-  timeColor: 'rgba(255,255,255,1)',
+  timeColor,
   changeTimeColor: (val) => set((state) => ({ timeColor: val })),
 
   // 日期文字颜色
-  dataColor: 'rgba(255,255,255,.68)',
+  dataColor,
   changeDataColor: (val) => set((state) => ({ dataColor: val })),
 
   // 提示文字颜色
-  tipsColor: 'rgba(255,255,255,.46)',
+  tipsColor,
   changeTipsColor: (val) => set((state) => ({ tipsColor: val })),
 
   // 底部提示文字
-  tipss: ['一寸光阴一寸金，寸金难买寸光阴','时光荏苒，岁月如梭，珍惜当下，莫待明日','时间是生命的馈赠，珍惜它，就是对生命最好的尊重','时间就像流水，一旦逝去，便不复返'],
+  tipss,
   changeTipss: (val) => set((state) => ({ tipss: val })),
 })));
 

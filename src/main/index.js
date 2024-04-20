@@ -47,6 +47,12 @@ app.whenReady().then(() => {
     }, hash, true);
   });
 
+  // 关闭窗口
+  ipcMain.on('close', (e) => {
+    const nowWin = BrowserWindow.fromWebContents(e.sender);
+    nowWin.close();
+  });
+
   mainWindow = createWindow({
     width: 1000,
     height: 560,
