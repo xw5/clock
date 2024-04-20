@@ -1,5 +1,5 @@
-appId: com.electron.app
-productName: clock
+appId: com.xw.clock
+productName: 桌面时钟
 directories:
   buildResources: build
 files:
