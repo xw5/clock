@@ -27,7 +27,7 @@ class HeartBeat {
     clearInterval(this.timer);
     this.timer = setInterval(() => {
       Object.keys(this.runBack).forEach((key) => this.runBack[key] && this.runBack[key]());
-      console.log('---- HeartBeat ----:心跳监听的程序', this.runBack);
+      // console.log('---- HeartBeat ----:心跳监听的程序', this.runBack);
     }, 1000);
   }
 

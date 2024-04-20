@@ -31,7 +31,7 @@
     /* font-size: 110px; */
     font-weight: bold;
     color: #fff;
-    background: rgb(22, 69, 62);
+    background: var(--cardColor);
   }
 
   .separate{
@@ -44,7 +44,7 @@
   }
   @keyframes clockPoint {
     0% {
-      background-color: rgb(22, 69, 62);
+      background-color: var(--cardColor);
     }
     100%{
       background-color: rgba(255, 255, 255, .68);
@@ -54,7 +54,7 @@
     width: .25em;
     height: .25em;
     border-radius: 3px;
-    background-color: rgb(22, 69, 62);
+    background-color: var(--cardColor);
   }
   .separate-item:nth-of-type(1) {
     margin-bottom: 10px;

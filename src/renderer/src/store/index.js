@@ -1,10 +1,13 @@
 import { create } from "zustand";
+import persist from '@renderer/utils/persist.js';
 
-const useGlobalStore = create((set) => ({
+const useGlobalStore = create(persist({
+  key: 'globalStorage', // 用于区分不同的 Store
+}, (set) => ({
 
   // 时钟款式
   clockStyle: 'normal',
-  changeClockType: (val) => set((state) => ({ clockStyle: val })),
+  changeClockStyle: (val) => set((state) => ({ clockStyle: val })),
 
   // 窗口置顶
   isTop: false,
@@ -24,15 +27,15 @@ const useGlobalStore = create((set) => ({
 
   // 时钟大小px
   size: 100,
-  changeSize: (val) => set((state) => ({ bears: val })),
+  changeSize: (val) => set((state) => ({ size: val })),
 
   // 下面文字滚播间隔s
   tipsDelay: 3,
   changeTipsDelay: (val) => set((state) => ({ tipsDelay: val })),
 
   // 卡片背景颜色
-  cordColor: 'rgba(22, 69, 62, 1)',
-  changeCardColor: (val) => set((state) => ({ cordColor: val })),
+  cardColor: 'rgba(22, 69, 62, 1)',
+  changeCardColor: (val) => set((state) => ({ cardColor: val })),
 
   // 数字时钟文字颜色
   timeColor: 'rgba(255,255,255,1)',
@@ -49,6 +52,6 @@ const useGlobalStore = create((set) => ({
   // 底部提示文字
   tipss: ['一寸光阴一寸金，寸金难买寸光阴','时光荏苒，岁月如梭，珍惜当下，莫待明日','时间是生命的馈赠，珍惜它，就是对生命最好的尊重','时间就像流水，一旦逝去，便不复返'],
   changeTipss: (val) => set((state) => ({ tipss: val })),
-}));
+})));
 
 export default useGlobalStore;

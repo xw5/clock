@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react'
-import { useNavigate, Link } from 'react-router-dom';
 import { timestampToTime, secondsToTime } from '@renderer/utils/common.js';
 import TextRolling from '@renderer/components/TextRolling/TextRolling.jsx';
 import DateStr from '@renderer/components/DateStr/DateStr.jsx';
@@ -11,10 +10,11 @@ import './Normal.scss';
 function Normal({}) {
   // const [ampm, setAmpm] = useState('');
   const [nowVal, setNowVal] = useState([0,0,0,0,0,0]);
-  const [nextVal, setNextVal] = useState([0,0,0,0,0,0]);
+  // const [nextVal, setNextVal] = useState([0,0,0,0,0,0]);
   const [isPointAni, setIsPointAni] = useState(false);
   // const [scaleSize, setScaleSize] = useState(1);
   const size = useGlobalStore((state) => state.size);
+  const cardColor = useGlobalStore((state) => state.cardColor);
   const counts = useGlobalStore((state) => state.counts);
   const clockType = useGlobalStore((state) => state.clockType);
   const countsRef = useRef(counts);
@@ -44,6 +44,7 @@ function Normal({}) {
     }
     // setAmpm(timeArr[3]);
     setNowVal(timerNowStr.replace(/:/g, '').split(''));
+    // console.log('---- setNowVal ----:', timerNowStr);
     setIsPointAni(true);
     const timer = setTimeout(() => {
       setIsPointAni(false);
@@ -65,7 +66,7 @@ function Normal({}) {
     // resizeFn();
     heartbeat.add('normal', countTime);
     // window.addEventListener('resize', resizeFn, false);
-    // sendSize();
+    sendSize();
     return () => {
       heartbeat.remove('normal');
       // window.removeEventListener('resize', resizeFn, false);
@@ -90,7 +91,7 @@ function Normal({}) {
       {/* 日期 星期 */}
       <DateStr />
       {/* <div className="text-[rgba(255,255,255,.26)] text-[40px] absolute bottom-0 right-[-78px]">{ ampm }</div> */}
-      <div className="w-full flex flex-row items-center" style={{fontSize: size * 1.1 + 'px'}}>
+      <div className="w-full flex flex-row items-center" style={{fontSize: size * 1.1 + 'px', '--cardColor': cardColor}}>
         <div 
           className="clock-item mr-[10px]" 
           style={{width: size + 'px', height: size * 1.6 + 'px', fontSize: size * 1.1 + 'px', lineHeight: size * 1.6 + 'px'}}

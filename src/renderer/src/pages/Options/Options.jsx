@@ -8,7 +8,7 @@ function Options({}) {
   const [form] = Form.useForm();
   const { 
     clockStyle,
-    changeClockType,
+    changeClockStyle,
     isTop,
     changeIsTop,
     counts,
@@ -17,7 +17,7 @@ function Options({}) {
     changeSize,
     tipsDelay,
     changeTipsDelay,
-    cordColor,
+    cardColor,
     changeCardColor,
     timeColor,
     changeTimeColor,
@@ -30,11 +30,11 @@ function Options({}) {
    } = useGlobalStore();
 
    // 时钟款式切换
-   const clockTypeChange = (value) => {
+   const clockStyleChange = (value) => {
      form.setFieldValue({
       clockStyle: value
      })
-     changeClockType(value);
+     changeClockStyle(value);
    }
 
   // 时钟尺寸设置
@@ -59,7 +59,7 @@ function Options({}) {
      const { metaColor } = value;
      changeCardColor(`rgba(${metaColor.r},${metaColor.g},${metaColor.b},${metaColor.a})`);
     form.setFieldValue({
-      cordColor: value
+      cardColor: value
      })
    }
 
@@ -117,15 +117,15 @@ function Options({}) {
    }
 
    useEffect(() => {
-     console.log('---- regbToObj ----:0', cordColor);
-     console.log('---- regbToObj ----:1', cordColor, regbToObj(cordColor));
+     console.log('---- regbToObj ----:0', cardColor);
+     console.log('---- regbToObj ----:1', cardColor, regbToObj(cardColor));
     form.setFieldsValue({
       clockStyle,
       isTop,
       counts,
       size,
       tipsDelay,
-      cordColor: regbToObj(cordColor),
+      cardColor: regbToObj(cardColor),
       timeColor: regbToObj(timeColor),
       dataColor: regbToObj(dataColor),
       tipsColor: regbToObj(tipsColor),
@@ -157,7 +157,7 @@ function Options({}) {
         >
           <Select
             style={{ width: 168 }}
-            onChange={clockTypeChange}
+            onChange={clockStyleChange}
             options={[
               { value: 'normal', label: '普通数字' },
               { value: 'flip', label: '翻页时钟' }
@@ -188,7 +188,7 @@ function Options({}) {
 
         <Form.Item
           label="卡片背景色"
-          name="cordColor"
+          name="cardColor"
         >
           <ColorPicker format="rgb" onChange={cardColorChange} />
         </Form.Item>
