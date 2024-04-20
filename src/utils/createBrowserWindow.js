@@ -7,6 +7,8 @@ export function createWindow(options, hash = 'clock', isDevTool = false) {
   const mainWindow = new BrowserWindow({
     show: false,
     autoHideMenuBar: true,
+    // 隐藏任务栏图标
+    skipTaskbar: false,
     // alwaysOnTop: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {

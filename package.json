@@ -1,10 +1,10 @@
 {
   "name": "clock",
   "version": "1.0.0",
-  "description": "An Electron application with React",
+  "description": "数字时钟",
   "main": "./out/main/index.js",
-  "author": "example.com",
-  "homepage": "https://electron-vite.org",
+  "author": "xw",
+  "homepage": "https://github-9819409.gitee.io/xwdataboard",
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",

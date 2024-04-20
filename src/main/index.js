@@ -77,6 +77,8 @@ app.whenReady().then(() => {
         frame: false,
       })
     }
+    // 苹果隐藏任务栏图标
+    app.dock.hide();
   })
 })
 
