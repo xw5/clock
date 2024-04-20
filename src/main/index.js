@@ -1,7 +1,8 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { electronApp, optimizer } from '@electron-toolkit/utils';
-import icon from '../../resources/icon.png?asset';
+import path from 'path';
 import { createWindow } from '../utils/createBrowserWindow.js';
+import createTray from '../utils/tray.js';
 
 let mainWindow = null;
 
@@ -45,6 +46,7 @@ app.whenReady().then(() => {
       width: 750,
       height: 560,
       title,
+      icon: path.join(__dirname, '../../resources/logo.ico')
     }, hash, true);
   });
 
@@ -60,6 +62,9 @@ app.whenReady().then(() => {
     transparent: true,
     frame: false,
   }, 'clock', true);
+
+  // 修改拖盘图标
+  createTray();
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
