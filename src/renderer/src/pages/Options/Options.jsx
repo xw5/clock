@@ -93,15 +93,19 @@ function Options({}) {
    }
 
    // 底部提示文字配置
-   const tipssChange = (value) => {
+   const tipssChange = (e) => {
+     console.log('---- tipssChange ----:', e.target.value);
+     const targetVal = e.target.value;
+     const targetVals = targetVal.split('\n').filter((item) => item);
     form.setFieldValue({
-      tipss: value.split('\n')
+      tipss: targetVals
      })
-     changeTipss(value.split('\n'));
+     changeTipss(targetVals);
    }
 
    // 底部文字滚播间隔
    const tipsDelayChange = (value) => {
+     console.log('---- tipsDelayChange ----:', value);
     form.setFieldValue({
       tipsDelay: value
      })
@@ -110,6 +114,7 @@ function Options({}) {
 
   // 倒计时秒数
    const countsChange = (value) => {
+    console.log('---- countsChange ----:', value);
     form.setFieldValue({
       counts: value
      })
@@ -171,7 +176,7 @@ function Options({}) {
         >
           <Slider
             min={60}
-            max={100}
+            max={160}
             onChange={sizeChange}
             tooltip={{
               open: false,

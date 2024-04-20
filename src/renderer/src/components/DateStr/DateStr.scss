@@ -1,0 +1,6 @@
+.options-btn{
+  transition: color .4s, transform .4s;
+  &:hover{
+    color: var(--dataColor);
+  }
+}

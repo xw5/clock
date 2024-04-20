@@ -1,17 +1,18 @@
 // 实现窗口拖拽
-class Drag {
-  constructor() {
+export default class Drag {
+  constructor(elemet) {
     this.pageX = 0;
     this.pageY = 0;
     this.mouseDownBind = null;
     this.mouseMoveBind = null;
     this.mouseUpBind = null;
+    this.elemet = elemet;
     this.init();
   }
 
   init() {
     this.mouseDownBind = this.mouseDown.bind(this);
-    document.documentElement.addEventListener('mousedown', this.mouseDownBind, false);
+    this.elemet.addEventListener('mousedown', this.mouseDownBind, false);
   }
 
   mouseDown(e) {
@@ -19,8 +20,8 @@ class Drag {
     this.pageY = e.pageY;
     this.mouseMoveBind = this.mouseMove.bind(this);
     this.mouseUpBind = this.mouseUp.bind(this);
-    document.documentElement.addEventListener('mousemove', this.mouseMoveBind, false);
-    document.documentElement.addEventListener('mouseup', this.mouseUpBind, false);
+    this.elemet.addEventListener('mousemove', this.mouseMoveBind, false);
+    this.elemet.addEventListener('mouseup', this.mouseUpBind, false);
 
   }
 
@@ -31,10 +32,8 @@ class Drag {
   }
 
   mouseUp() {
-    document.documentElement.removeEventListener('mousemove', this.mouseMoveBind, false);
-    document.documentElement.removeEventListener('mouseup', this.mouseUpBind, false);
+    this.elemet.removeEventListener('mousemove', this.mouseMoveBind, false);
+    this.elemet.removeEventListener('mouseup', this.mouseUpBind, false);
   }
 
-} 
-
-new Drag();
+}

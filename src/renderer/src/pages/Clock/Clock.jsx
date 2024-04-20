@@ -3,6 +3,7 @@ import useGlobalStore from '@renderer/store/index.js';
 import Normal from '@renderer/components/Normal/Normal.jsx';
 import heartbeat from '@renderer/utils/heartbeat';
 import Flip from '@renderer/components/Flip/Flip.jsx';
+import Drag from '@renderer/utils/Drag.js';
 
 function Clock() {
   const clockstyle = useGlobalStore((state) => state.clockStyle);
@@ -31,12 +32,14 @@ function Clock() {
 
   useEffect(() => {
     heartbeat.start();
-    document.querySelector('#clockWrap').addEventListener('mouseenter', mouseEnter.current, false);
-    document.querySelector('#clockWrap').addEventListener('mouseleave', mouseLeave.current, false);
+    const clockWrap = document.querySelector('#clockWrap');
+    new Drag(clockWrap);
+    clockWrap.addEventListener('mouseenter', mouseEnter.current, false);
+    clockWrap.addEventListener('mouseleave', mouseLeave.current, false);
     return () => {
       heartbeat.stop();
-      document.querySelector('#clockWrap').removeEventListener('mouseenter', mouseEnter.current, false);
-      document.querySelector('#clockWrap').removeEventListener('mouseleave', mouseLeave.current, false);
+      clockWrap.removeEventListener('mouseenter', mouseEnter.current, false);
+      clockWrap.removeEventListener('mouseleave', mouseLeave.current, false);
     };
   },
   []);

@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react'
-import { useNavigate, Link } from 'react-router-dom';
 import { timestampToTime, secondsToTime } from '@renderer/utils/common.js';
 import TextRolling from '@renderer/components/TextRolling/TextRolling.jsx';
 import DateStr from '@renderer/components/DateStr/DateStr.jsx';
@@ -15,6 +14,8 @@ function Flip({}) {
   const [isPointAni, setIsPointAni] = useState(false);
   // const [scaleSize, setScaleSize] = useState(1);
   const size = useGlobalStore((state) => state.size);
+  const cardColor = useGlobalStore((state) => state.cardColor);
+  const timeColor = useGlobalStore((state) => state.timeColor);
   const counts = useGlobalStore((state) => state.counts);
   const clockType = useGlobalStore((state) => state.clockType);
   const countsRef = useRef(counts);
@@ -92,7 +93,7 @@ function Flip({}) {
         {/* 日期 星期 */}
         <DateStr />
         {/* <div className="text-[rgba(255,255,255,.26)] text-[40px] absolute bottom-0 right-[-78px]">{ ampm }</div> */}
-        <div className="w-full flex flex-row items-center" style={{fontSize: size * 1.1 + 'px'}}>
+        <div className="w-full flex flex-row items-center" style={{fontSize: size * 1.1 + 'px', '--cardColor': cardColor, '--timeColor': timeColor}}>
           <div 
             className={"clock-item mr-[10px]" + (nowVal[0] !== nextVal[0] ? ' active' : '')} 
             style={{width: size + 'px', height: size * 1.6 + 'px', fontSize: size * 1.1 + 'px', lineHeight: size * 1.6 + 'px'}}

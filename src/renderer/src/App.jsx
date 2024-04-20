@@ -2,7 +2,6 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
 import Clock from './pages/Clock/Clock.jsx';
 import Options from './pages/Options/Options.jsx';
-import '@renderer/utils/Drag.js';
 
 function App() {
   // const ipcHandle = () => window.electron.ipcRenderer.send('ping')
