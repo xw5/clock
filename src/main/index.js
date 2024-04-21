@@ -58,8 +58,14 @@ app.whenReady().then(() => {
   });
 
   // 右键菜单
-  ipcMain.on('show-context-menu', (e, type) => {
-    createPopMenu(e, type);
+  ipcMain.on('show-context-menu', (e, type, isTop) => {
+    createPopMenu(e, type, isTop);
+  });
+
+  // 置顶
+  ipcMain.on('setTop', (e, type) => {
+    // console.log('---- setTop ----:', type, JSON.stringify(e));
+    mainWindow.setAlwaysOnTop(type);
   });
 
   mainWindow = createWindow({

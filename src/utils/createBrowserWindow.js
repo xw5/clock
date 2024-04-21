@@ -21,7 +21,7 @@ export function createWindow(options, hash = 'clock', isDevTool = false) {
   // mainWindow.setIgnoreMouseEvents(true);
   mainWindow.on('ready-to-show', () => {
     mainWindow.show();
-    if (isDevTool && is.dev) {
+    if (is.dev && isDevTool) {
       mainWindow.webContents.openDevTools();
     }
   });

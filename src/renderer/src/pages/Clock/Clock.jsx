@@ -14,8 +14,10 @@ function Clock() {
   const mouseEnter = useRef();
   const mouseLeave = useRef();
   const contextMenu = useRef();
+  const isTopRef = useRef();
   const changeIsShowBtn = useGlobalStore((state) => state.changeIsShowBtn);
   const changeClockStyle = useGlobalStore((state) => state.changeClockStyle);
+  const isTop = useGlobalStore((state) => state.isTop);
   const changeIsTop = useGlobalStore((state) => state.changeIsTop);
   const chagneCounts = useGlobalStore((state) => state.chagneCounts);
   const changeSize = useGlobalStore((state) => state.changeSize);
@@ -37,12 +39,17 @@ function Clock() {
   }
 
   contextMenu.current = () => {
-    window.electron.ipcRenderer.send('show-context-menu', clockTypeRef.current);
+    window.electron.ipcRenderer.send('show-context-menu', clockTypeRef.current, isTopRef.current);
   }
 
   useEffect(() => {
     clockTypeRef.current = clockType
   }, [clockType]);
+
+  useEffect(() => {
+    isTopRef.current = isTop;
+    window.electron.ipcRenderer.send('setTop', isTop);
+  }, [isTop]);
 
   useEffect(() => {
     heartbeat.start();
@@ -58,8 +65,8 @@ function Clock() {
   }, []);
 
   useEffect(() => {
-    window.electron.ipcRenderer.on('contextAction', (e, type) => {
-      // console.log('---- contextAction ----:', e, type);
+    window.electron.ipcRenderer.on('contextAction', (e, type, isTop) => {
+      console.log('---- contextAction ----:', e, type, isTop);
       switch(type) {
         case 'count':
           changeClockType('count');
@@ -69,6 +76,10 @@ function Clock() {
           break;
         case 'resetCount':
           chagneIsRestCounts(isRestCounts ? false : true);
+          break;
+        case 'isTop':
+          changeIsTop(isTop);
+          // window.electron.ipcRenderer.send('setTop', isTop);
           break;
         default:
           break;
@@ -98,10 +109,11 @@ function Clock() {
     Object.keys(newValueO).forEach((key) => {
       if (newValueO[key] !== oldValueO[key]) {
         const nowVal = newValueO[key];
-        // console.log('---- storageUpdate.current ----:', key, nowVal);
+        console.log('---- storageUpdate.current ----:', key, nowVal);
         switch(key) {
           case 'isTop':
             changeIsTop(nowVal);
+            // window.electron.ipcRenderer.send('setTop', nowVal);
             break;
           case 'size':
             changeSize(nowVal);
