@@ -87,7 +87,6 @@ function Normal({}) {
   }, [size]);
 
   useEffect(() => {
-    console.log('---- isRestCounts, counts, useEffect ----:', isRestCounts, counts);
     countsRef.current = counts;
     countStep.current = 1;
   }, [isRestCounts, counts]);
@@ -95,7 +94,10 @@ function Normal({}) {
   return (
     <div className="w-full h-screen fixed inset-0 z-50 flex flex-col justify-center items-center cursor-pointer select-none clock-normal">
       {/* style={{transform: `scale(${scaleSize})`}} */}
-      <div className="clock-container relative flex flex-col pointer-events-auto group/action" ref={clockContainer}>
+      <div
+        className="clock-container relative flex flex-col pointer-events-auto group/action"
+        ref={clockContainer}
+      >
       {/* 日期 星期 */}
       <DateStr />
       {/* <div className="text-[rgba(255,255,255,.26)] text-[40px] absolute bottom-0 right-[-78px]">{ ampm }</div> */}

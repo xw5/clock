@@ -1,3 +1,5 @@
+import { rule } from 'postcss';
+
 module.exports = {
   extends: [
     'eslint:recommended',
@@ -5,5 +7,8 @@ module.exports = {
     'plugin:react/jsx-runtime',
     '@electron-toolkit',
     '@electron-toolkit/eslint-config-prettier'
-  ]
-}
+  ],
+  rules: {
+    semi: 'always'
+  }
+};
