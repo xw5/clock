@@ -1,12 +1,18 @@
-# clock
+# 桌面时钟
 
-An Electron application with React
+基于electron-vite react开发的桌面时钟工具
 
-## Recommended IDE Setup
+![图片名称](./clock.gif '图片Title')
 
-- [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+## 功能特性
 
-## Project Setup
+- 支持当前时间显示
+- 支持倒计时功能
+- 普通数字时钟显示
+- 翻牌数字时钟显示
+- 高度可配置（时钟款式、大小、颜色、翻转文案、倒计时时间）
+
+## 项目启动
 
 ### Install
 
